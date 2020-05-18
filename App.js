@@ -8,18 +8,19 @@ import {
   StatusBar,
   Dimensions
 } from 'react-native';
-import Animated from 'react-native-reanimated'
+import Animated, { Extrapolate } from 'react-native-reanimated'
 import { PanGestureHandler, State }  from 'react-native-gesture-handler'
 // import { diffClamp, withOffset, onGestureEvent } from 'react-native-redash'
 
 const App = () => {
   const { width, height} = Dimensions.get('window')
-  const { Value, event } = Animated;
+  const { Value, event, useCode } = Animated;
   const state = new Value(State.UNDETERMINED)
   const yOffset = new Value(40);
   const translateY = yOffset.interpolate({
     inputRange: [0,300],
-    outputRange: [50,-300]
+    outputRange: [50,-300],
+    extrapolate: Extrapolate.CLAMP
   })
 
   useEffect(()=>{
